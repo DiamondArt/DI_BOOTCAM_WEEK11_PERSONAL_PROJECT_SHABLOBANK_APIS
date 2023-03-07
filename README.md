@@ -9,4 +9,3 @@ centres médicaux pour la gestion de banque de sang.
 
 ## Hebergement sur render 
     
-[![IMAGE ALT TEXT HERE](https://github.com/TakiRahal/spring-boot-render/blob/main/src/main/resources/static/spring_boot_render.png)](https://youtu.be/-Ih_ky5HMEA)
