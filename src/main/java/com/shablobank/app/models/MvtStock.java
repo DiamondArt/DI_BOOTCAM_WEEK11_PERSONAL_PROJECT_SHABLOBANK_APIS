@@ -21,8 +21,8 @@ public class MvtStock extends  AbstractEntity{
     private BigDecimal quantite;
 
     @ManyToOne
-    @JoinColumn(name = "idBloodBag")
-    private BloodBag bloodBag;
+    @JoinColumn(name = "idBlood")
+    private Bloods blood;
 
     @Column(name = "typemvt")
     @Enumerated(EnumType.STRING)

@@ -16,7 +16,7 @@ import java.util.Date;
 public class AbstractEntity implements Serializable {
     @Id
     @GeneratedValue
-    private Integer id;
+    private long id;
     /**@CreatedDate
     private Date createdAt;
     @LastModifiedDate

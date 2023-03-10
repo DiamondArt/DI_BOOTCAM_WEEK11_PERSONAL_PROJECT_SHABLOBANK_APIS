@@ -31,6 +31,6 @@ public class Donor extends AbstractEntity{
     private Integer idHopital;
 
     @OneToMany(mappedBy = "donor")
-    private List<BloodBag> bloodBags;
+    private List<Bloods> bloods;
 
 }

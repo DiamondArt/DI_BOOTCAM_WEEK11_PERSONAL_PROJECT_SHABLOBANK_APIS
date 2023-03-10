@@ -10,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "torders")
-public class Order  extends AbstractEntity {
+@Table(name = "tdemandes")
+public class Demande extends AbstractEntity {
     @Column(name = "bloodType", length = 3, nullable = false)
     private String bloodType;
     @Column(name = "quantity", nullable = false)
@@ -22,7 +22,7 @@ public class Order  extends AbstractEntity {
     @Column(name = "idHopitalTraitant", nullable = true)
     private Integer idHopitalTraitant;
 
-    @Column(name = "info",length = 250, nullable = true)
+    @Column(name = "antecedant",length = 250, nullable = true)
     private String info;
 
     @ManyToOne

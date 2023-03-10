@@ -18,9 +18,6 @@ import lombok.*;
 @Table(name = "tligneOrderpatients")
 public class LigneOrderPatient extends AbstractEntity {
 
-  @ManyToOne
-  @JoinColumn(name = "idOrder")
-  private Order order;
 
   @ManyToOne
   @JoinColumn(name = "idOrderpatient")
