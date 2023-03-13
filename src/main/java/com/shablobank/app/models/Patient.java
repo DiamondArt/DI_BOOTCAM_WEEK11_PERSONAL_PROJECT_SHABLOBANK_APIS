@@ -1,11 +1,7 @@
 package com.shablobank.app.models;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 
@@ -17,7 +13,9 @@ import lombok.*;
 @Entity
 @Table(name = "tpatients")
 public class Patient extends AbstractEntity {
-
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
   @Column(name = "firstname")
   private String firstname;
 

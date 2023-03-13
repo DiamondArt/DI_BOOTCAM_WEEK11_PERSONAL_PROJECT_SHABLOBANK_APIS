@@ -18,6 +18,10 @@ import java.util.List;
 @Entity
 @Table(name = "thopitals")
 public class Hopital extends AbstractEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @NotNull(message = "Le champ name est obligatoire")
     @NotBlank(message = "Le champ name ne peut etre vide")
     @Column(name = "name", length = 50, nullable = false)
@@ -46,5 +50,5 @@ public class Hopital extends AbstractEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "hopital")
-    private List<Demande> demandes;
+    private List<Demandes> demandes;
 }

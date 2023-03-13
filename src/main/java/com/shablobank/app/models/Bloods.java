@@ -1,6 +1,8 @@
 package com.shablobank.app.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -21,29 +23,43 @@ import java.util.List;
 @Table(name = "tbloods")
 public class Bloods extends AbstractEntity implements  Serializable{
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+  @NotNull(message = "Le champ réference est obligatoire")
+  @NotBlank(message = "Le champ référence ne peut etre vide")
   @Column(name = "codeRef", length = 250, nullable = false)
   private String codeRef;
 
-  @Column(name = "bloodType")
-  @Enumerated(EnumType.STRING)
-  private BloodType bloodType;
+  @NotNull(message = "Le champ groupe sanguin est obligatoire")
+  @NotBlank(message = "Le champ groupe sanguin ne peut etre vide")
+  @Column(name = "bloodType" )
+  private String bloodType;
 
-  @Column(name = "designation", nullable = false)
+  @Column(name = "designation", nullable = true)
   private String designation;
 
-  @Column(name = "volume", nullable= false)
-  private BigDecimal volume;
+  @NotNull(message = "Le champ quantité est obligatoire")
+  @NotBlank(message = "Le champ quantité ne peut etre vide")
+  @Column(name = "quantity")
+  private String quantity;
 
-  @Column(name = "priceHt")
-  private BigDecimal priceHt;
+  @NotNull(message = "Le champ volume est obligatoire")
+  @NotBlank(message = "Le champ volume ne peut etre vide")
+  @Column(name = "volume", nullable= false)
+  private String volume;
+
+  @Column(name = "priceHt", nullable = true)
+  private String priceHt;
 
   @ManyToOne
   @JoinColumn(name = "idHopital")
   private Hopital hopital;
 
-  @ManyToOne
-  @JoinColumn(name = "idDonor")
-  private Donor donor;
+
+  //@ManyToOne
+  //@JoinColumn(name = "idDonor")
+  //private Donor donor;
 
   @OneToMany(mappedBy = "blood")
   private List<MvtStock> mvtStks;

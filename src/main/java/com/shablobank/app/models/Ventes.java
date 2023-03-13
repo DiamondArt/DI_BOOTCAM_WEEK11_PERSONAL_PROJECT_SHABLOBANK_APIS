@@ -2,10 +2,7 @@ package com.shablobank.app.models;
 
 import java.time.Instant;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.*;
 
@@ -17,6 +14,10 @@ import lombok.*;
 @Entity
 @Table(name = "tventes")
 public class Ventes extends AbstractEntity {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
   @Column(name = "code")
   private String code;

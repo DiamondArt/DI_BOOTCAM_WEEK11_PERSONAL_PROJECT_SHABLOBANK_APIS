@@ -15,6 +15,10 @@ import lombok.*;
 @Table(name = "torderpatients")
 public class OrderPatient extends AbstractEntity {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
+
   @Column(name = "code")
   private String code;
 

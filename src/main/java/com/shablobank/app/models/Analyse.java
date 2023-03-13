@@ -21,6 +21,9 @@ import java.util.List;
 @Table(name = "tanalyse")
 public class Analyse extends AbstractEntity implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @NotNull(message = "Le champ libelle est obligatoire")
     @NotBlank(message = "Le champ libelle ne peut etre vide")
     private String libelle;

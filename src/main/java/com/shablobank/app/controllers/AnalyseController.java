@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/analyse")
+@CrossOrigin("*")
 public class AnalyseController {
   
         @Autowired

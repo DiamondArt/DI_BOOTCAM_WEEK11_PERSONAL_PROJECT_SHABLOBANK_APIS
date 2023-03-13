@@ -14,6 +14,10 @@ import java.time.Instant;
 @Entity
 @Table(name = "tmvtstocks")
 public class MvtStock extends  AbstractEntity{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "datemvt")
     private Instant dateMvt;
 
