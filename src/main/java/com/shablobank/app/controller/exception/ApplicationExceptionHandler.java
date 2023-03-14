@@ -1,4 +1,4 @@
-package com.shablobank.app.Exception;
+package com.shablobank.app.controller.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;

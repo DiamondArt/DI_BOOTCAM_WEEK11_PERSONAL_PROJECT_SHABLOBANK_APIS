@@ -1,6 +1,6 @@
 package com.shablobank.app.service;
 
-import com.shablobank.app.Exception.EntityException;
+import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Hopital;
 
 import java.util.List;

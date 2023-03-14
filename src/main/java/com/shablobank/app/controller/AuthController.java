@@ -1,7 +1,5 @@
-package com.shablobank.app.controllers;
+package com.shablobank.app.controller;
 
-import com.shablobank.app.models.ERole;
-import com.shablobank.app.models.Role;
 import com.shablobank.app.models.User;
 import com.shablobank.app.payload.LoginDto;
 import com.shablobank.app.payload.SignupDto;
@@ -17,10 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/v1/api/auth")
 @CrossOrigin("*")
 public class AuthController {
 
@@ -39,7 +35,7 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getFirstNameOrEmail(), loginDto.getPassword()));
+                loginDto.getUsername(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);

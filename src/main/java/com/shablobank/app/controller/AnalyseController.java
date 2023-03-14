@@ -1,6 +1,6 @@
-package com.shablobank.app.controllers;
+package com.shablobank.app.controller;
 
-import com.shablobank.app.Exception.EntityException;
+import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Analyse;
 import com.shablobank.app.repository.IAnalyseRepository;
 import com.shablobank.app.service.AnalyseService;
@@ -22,7 +22,7 @@ public class AnalyseController {
         private IAnalyseRepository analyseRepository;
         @Autowired
         private AnalyseService analyseService;
-        private final Logger LOGGER = LoggerFactory.getLogger(com.shablobank.app.controllers.AnalyseController.class);
+        private final Logger LOGGER = LoggerFactory.getLogger(com.shablobank.app.controller.AnalyseController.class);
 
         @GetMapping()
         public List<Analyse> fetchAnalyse() {

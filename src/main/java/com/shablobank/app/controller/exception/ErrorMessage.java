@@ -1,4 +1,4 @@
-package com.shablobank.app.Exception;
+package com.shablobank.app.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -42,8 +42,20 @@ public class User extends AbstractEntity {
     @JoinColumn(name = "idHopital")
     private Hopital hopital;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnore
-    private List<Role> roles;
+    @ManyToOne
+    @JoinColumn(name = "id_role", referencedColumnName = "id")
+    private Role role;
 
+
+
+ public static User superAdmin(Role role){
+     User user = new  User();
+     user.setFirstname("Melissa");
+     user.setLastname("aaaa");
+     user.setEmail("hello@gmail.com");
+     user.setPassword("helloworld");
+     user.setRole(role);
+
+     return user;
+ }
 }

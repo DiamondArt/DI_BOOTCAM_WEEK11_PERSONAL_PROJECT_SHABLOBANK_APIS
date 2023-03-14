@@ -1,12 +1,8 @@
-package com.shablobank.app.controllers;
+package com.shablobank.app.controller;
 
-import com.shablobank.app.Exception.EntityException;
-import com.shablobank.app.models.Analyse;
+import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Bloods;
-import com.shablobank.app.models.Hopital;
-import com.shablobank.app.repository.IAnalyseRepository;
 import com.shablobank.app.repository.IBloodRepository;
-import com.shablobank.app.service.AnalyseService;
 import com.shablobank.app.service.BloodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +24,7 @@ public class BloodController {
     private IBloodRepository bloodRepository;
     @Autowired
     private BloodService bloodService;
-    private final Logger LOGGER = LoggerFactory.getLogger(com.shablobank.app.controllers.AnalyseController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(com.shablobank.app.controller.AnalyseController.class);
 
     @GetMapping()
     public ResponseEntity<List<Object>> fetchAllBlood() {

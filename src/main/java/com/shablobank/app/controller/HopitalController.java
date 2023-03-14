@@ -1,7 +1,7 @@
-package com.shablobank.app.controllers;
+package com.shablobank.app.controller;
 
 
-import com.shablobank.app.Exception.EntityException;
+import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Hopital;
 import com.shablobank.app.repository.IHopitalRepository;
 import com.shablobank.app.service.HopitalService;

@@ -1,14 +1,11 @@
 package com.shablobank.app.service;
 
-import com.shablobank.app.Exception.EntityException;
-import com.shablobank.app.models.ERole;
-import com.shablobank.app.models.Role;
+import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.User;
 import com.shablobank.app.payload.LoginDto;
 import com.shablobank.app.payload.SignupDto;
 import com.shablobank.app.repository.IRoleRepository;
 import com.shablobank.app.repository.IUserRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,10 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 @Service
 public class AuthService implements IAuthService {
 
@@ -47,7 +40,7 @@ public class AuthService implements IAuthService {
     public String login(LoginDto loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getFirstNameOrEmail(), loginDto.getPassword()));
+                loginDto.getUsername(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

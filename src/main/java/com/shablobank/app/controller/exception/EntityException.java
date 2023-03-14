@@ -1,4 +1,5 @@
-package com.shablobank.app.Exception;
+package com.shablobank.app.controller.exception;
+
 
 public class EntityException extends  Exception{
     public EntityException() {
