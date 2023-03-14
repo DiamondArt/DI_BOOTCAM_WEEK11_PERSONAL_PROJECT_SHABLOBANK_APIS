@@ -35,32 +35,6 @@ public class BloodController {
     public ResponseEntity<List<Object>> fetchAllBlood() {
 
         List<Bloods> entityList = bloodService.fetchAllBloodsList();
-       /** "createdAt": "2023-03-13T11:01:23.276+00:00",
-                "id": 1,
-                "codeRef": "ANNN",
-                "bloodType": "AB",
-                "designation": "lorem ipsum",
-                "quantity": "50",
-                "volume": "450",
-                "priceHt": null,
-                "hopital": {
-            "createdAt": "2023-03-13T11:00:51.068+00:00",
-                    "id": 2,
-                    "name": "Institut Bon pasteur",
-                    "adresse": {
-                "adresse1": "CHU Cocody - 01 BP 490 Abidjan 01",
-                        "adresse2": "Chu d'angre",
-                        "ville": "Abidjan",
-                        "codePostale": "01 BP 490 Abidjan",
-                        "pays": "Côte d'ivoire"
-            },
-            "latitude": "-3.9957911767199974",
-                    "longitude": "5.345090297280184",
-                    "statut_juridique": "SARL",
-                    "nbre_associe": 4
-        },
-        "mvtStks": [],
-        "bloodAnalysies": [] **/
         List<Object> entities = new ArrayList<Object>();
 
        //List<Object> E = new ArrayList<Object>();
@@ -72,7 +46,8 @@ public class BloodController {
                     "designation", blood.getDesignation(),
                     "quantity", blood.getQuantity(),
                     "volume", blood.getVolume(),
-                    "hopital_id", blood.getHopital().getId()
+                    "hopital_id", blood.getHopital().getId(),
+                    "createdAt", blood.getCreatedAt()
             ));
         }
         return ResponseEntity.status(HttpStatus.OK).body(entities);
@@ -107,10 +82,12 @@ public class BloodController {
     }
 
     @DeleteMapping("{id}")
-    public String deleteBlood(@PathVariable("id") Long idBlood) throws EntityException{
+    public ResponseEntity<Object> deleteBlood(@PathVariable("id") Long idBlood) throws EntityException{
         LOGGER.info("Inside deleteBlood BloodController ");
         bloodService.deleteBloods(idBlood);
-        return "Delete successfull";
+        String message ="Delete successfull";
+        return ResponseEntity.status(HttpStatus.OK).body(
+                Map.of("message", message));
     }
 
     @PostMapping()

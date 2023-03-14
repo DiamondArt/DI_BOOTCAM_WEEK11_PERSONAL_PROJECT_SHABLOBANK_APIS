@@ -37,9 +37,7 @@ public class SecurityConfig  {
                 .authenticated().and().csrf().disable().cors().configurationSource(request -> corsConfiguration);
 
     }
-
-
-
+    
     private UserDetailsService userDetailsService;
 
     public SecurityConfig(UserDetailsService userDetailsService){
