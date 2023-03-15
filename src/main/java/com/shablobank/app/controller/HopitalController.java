@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/hopital")
+@RequestMapping("/v1/api/hopital")
 @CrossOrigin("*")
 public class HopitalController {
     @Autowired
