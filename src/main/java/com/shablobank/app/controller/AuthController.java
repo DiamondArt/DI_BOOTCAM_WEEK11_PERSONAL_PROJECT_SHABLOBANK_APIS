@@ -1,6 +1,7 @@
 package com.shablobank.app.controller;
 
 import com.shablobank.app.config.jwt.JwTokenClient;
+import com.shablobank.app.config.jwt.JwtUserDetailsImpl;
 import com.shablobank.app.models.User;
 import com.shablobank.app.payload.LoginDto;
 import com.shablobank.app.payload.SignupDto;
@@ -37,11 +38,13 @@ public class AuthController {
 
     private JwTokenClient jwtTokenProvider;
     @PostMapping("/signin")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtTokenProvider.generateJwtToken((JwtUserDetailsImpl) authentication);
 
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }

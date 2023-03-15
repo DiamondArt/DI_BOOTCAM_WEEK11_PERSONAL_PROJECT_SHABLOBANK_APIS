@@ -3,9 +3,14 @@ package com.shablobank.app.config;
 import com.shablobank.app.config.jwt.JwtAuthenticationEntryPoint;
 import com.shablobank.app.config.jwt.JwtRequestFilter;
 import com.shablobank.app.config.jwt.JwtUserDetailsService;
+import com.shablobank.app.models.ERole;
+import com.shablobank.app.models.Role;
+import com.shablobank.app.repository.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Description;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,6 +20,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Optional;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 
 @Configuration
@@ -29,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
-
+    private IRoleRepository roleRepository;
 
     @Bean
     public static PasswordEncoder bcryptPasswordEncoder(){
@@ -69,5 +78,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // configure AuthenticationManager to know where to load from user for matching credentials
         // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(bcryptPasswordEncoder());
+        initData();
+    }
+
+
+    @Async
+    @Description("")
+     void initData(){
+        getLogger().info("[START APPLICATION DATA INITIALISATION]");
+    }
+
+    private void createDefaultRole(){
+        try{
+            Optional<Role> role = roleRepository.findByName(ERole.ROLE_ADMIN);
+        }catch (Exception e){
+            e.printStackTrace();
+            getLogger().error(e.getMessage());
+        }
     }
 }
