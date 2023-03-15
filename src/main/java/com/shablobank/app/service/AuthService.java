@@ -1,5 +1,7 @@
 package com.shablobank.app.service;
 
+import com.shablobank.app.config.jwt.JwTokenClient;
+import com.shablobank.app.config.jwt.JwtUserDetailsImpl;
 import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.User;
 import com.shablobank.app.payload.LoginDto;
@@ -20,32 +22,32 @@ public class AuthService implements IAuthService {
     private IUserRepository userRepository;
     private IRoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
-    //private JwtTokenProvider jwtTokenProvider;
+    private JwTokenClient jwtTokenProvider;
 
 
     public AuthService(AuthenticationManager authenticationManager,
                        IUserRepository userRepository,
                        IRoleRepository roleRepository,
-                           PasswordEncoder passwordEncoder
-                           //JwtTokenProvider jwtTokenProvider
+                           PasswordEncoder passwordEncoder,
+                           JwTokenClient jwtTokenProviders
     ) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
-        //this.jwtTokenProvider = jwtTokenProvider;
+        this.jwtTokenProvider = jwtTokenProviders;
     }
 
     @Override
     public String login(LoginDto loginDto) {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsername(), loginDto.getPassword()));
+                loginDto.getEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        //String token = jwtTokenProvider.generateToken(authentication);
-        String token = "rttaaaaaaaaaaaaaaaaa";
+        String token = jwtTokenProvider.generateJwtToken((JwtUserDetailsImpl) authentication);
+        //String token = "rttaaaaaaaaaaaaaaaaa";
 
         return token;
     }
@@ -60,11 +62,13 @@ public class AuthService implements IAuthService {
         }
 
         User user = new User();
-        user.setEmail(registerDto.getEmail());
-        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         user.setLastname(registerDto.getLastname());
         user.setFirstname(registerDto.getFirstname());
-        user.setHopital(registerDto.getIdHopital());
+        user.setEmail(registerDto.getEmail());
+        user.setHopital(registerDto.getHopital());
+        user.setRole(registerDto.getRole());
+        user.setAdresse(registerDto.getAdresse());
+        user.setPassword(passwordEncoder.encode(registerDto.getPassword()));
         //Role roles = roleRepository.findByName(ERole.ROLE_ADMIN).get();
         //user.setRoles(Collections.singletonList(roles));
 

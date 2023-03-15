@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 public interface IUserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT c FROM User c WHERE c.email = ?1 ")
+    @Query(value = "SELECT * FROM tusers  WHERE email =:email ", nativeQuery = true)
     User findUserByEmail(String email);
     Optional<User> findByFirstnameOrEmail(String firstname, String email);
 

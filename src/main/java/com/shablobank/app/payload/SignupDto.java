@@ -1,5 +1,7 @@
 package com.shablobank.app.payload;
+import com.shablobank.app.models.Adresse;
 import com.shablobank.app.models.Hopital;
+import com.shablobank.app.models.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,9 @@ import lombok.NoArgsConstructor;
 public class SignupDto {
     private String lastname;
     private String firstname;
-    private Hopital idHopital;
+    private Hopital hopital;
+    private Role role;
+    private Adresse adresse;
     private String email;
     private String password;
 }

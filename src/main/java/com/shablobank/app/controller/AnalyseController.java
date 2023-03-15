@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/analyse")
+@RequestMapping("/v1/api/analyse")
 @CrossOrigin("*")
 public class AnalyseController {
   

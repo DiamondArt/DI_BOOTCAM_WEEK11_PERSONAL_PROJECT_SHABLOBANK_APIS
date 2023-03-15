@@ -1,5 +1,6 @@
 package com.shablobank.app.controller;
 
+import com.shablobank.app.config.jwt.JwTokenClient;
 import com.shablobank.app.models.User;
 import com.shablobank.app.payload.LoginDto;
 import com.shablobank.app.payload.SignupDto;
@@ -14,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/api/auth")
@@ -32,17 +35,19 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private JwTokenClient jwtTokenProvider;
     @PostMapping("/signin")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsername(), loginDto.getPassword()));
+                loginDto.getEmail(), loginDto.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignupDto signUpDto){
+    public ResponseEntity<?> registerUser(@RequestBody User signUpDto){
 
         // add check for username exists in a DB
         //if(userRepository.existsByUsername(signUpDto.getUsername())){
@@ -59,14 +64,17 @@ public class AuthController {
         user.setLastname(signUpDto.getLastname());
         user.setFirstname(signUpDto.getFirstname());
         user.setEmail(signUpDto.getEmail());
-        user.setHopital(signUpDto.getIdHopital());
+        user.setHopital(signUpDto.getHopital());
+        user.setRole(signUpDto.getRole());
+        user.setAdresse(signUpDto.getAdresse());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         //Role roles = roleRepository.findByName(ERole.ROLE_ADMIN).get();
         //user.setRoles(Collections.singletonList(roles));
+        System.out.println("===========================================");
+        System.out.println(user);
+       User _user = userRepository.save(user);
 
-        userRepository.save(user);
-
-       return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+       return new ResponseEntity<>(_user, HttpStatus.OK);
 
     }
 
