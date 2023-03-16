@@ -3,11 +3,7 @@ package com.shablobank.app.controller.exception;
 import com.shablobank.app.models.User;
 import org.springframework.lang.Nullable;
 
-/**
- * @author desireadje
- * @created 16/01/2023 - 09:45
- * @project spring-boot
- */
+
 public class NotFoundException extends Exception {
     private String id;
     private Class aClass;

@@ -1,10 +1,5 @@
 package com.shablobank.app.controller.exception;
 
-/**
- * @author desireadje
- * @created 16/01/2023 - 10:07
- * @project spring-boot
- */
 public class LdapClientException extends Exception {
     private String message;
 

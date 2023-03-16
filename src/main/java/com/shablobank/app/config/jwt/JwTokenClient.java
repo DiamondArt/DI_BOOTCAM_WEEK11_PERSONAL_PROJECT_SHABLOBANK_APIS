@@ -12,11 +12,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.function.Function;
 
-/**
- * @author desireadje
- * @created 18/11/2022 - 10:45
- * @project spring-boot
- */
 @Component
 public class JwTokenClient implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;

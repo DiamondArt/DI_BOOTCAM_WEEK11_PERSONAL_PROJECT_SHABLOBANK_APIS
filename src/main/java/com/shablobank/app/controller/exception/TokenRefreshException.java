@@ -1,10 +1,5 @@
 package com.shablobank.app.controller.exception;
 
-/**
- * @author desireadje
- * @created 23/01/2023 - 14:46
- * @project spring-boot
- */
 public class TokenRefreshException extends Exception {
     private static final long serialVersionUID = 1L;
     private TokenRefreshException(String message) {

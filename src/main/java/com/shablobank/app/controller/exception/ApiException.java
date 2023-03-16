@@ -8,11 +8,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author desireadje
- * @created 16/01/2023 - 09:43
- * @project spring-boot
- */
+
 public class ApiException {
     private Date timestamp = new Date();
     private Integer status;

@@ -18,11 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-/**
- * @author desireadje
- * @created 18/11/2022 - 10:48
- * @project spring-boot
- */
+
 @Component
 @Scope("prototype")
 public class JwtRequestFilter extends OncePerRequestFilter {

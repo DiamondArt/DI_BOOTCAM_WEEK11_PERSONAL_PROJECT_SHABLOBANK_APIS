@@ -1,6 +1,5 @@
 package com.shablobank.app.controller.exception;
 
-
 public class EntityException extends  Exception{
     public EntityException() {
         super();
