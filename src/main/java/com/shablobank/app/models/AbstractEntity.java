@@ -12,7 +12,8 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class) // ecouter automatiquement cette classe et mettre à jour dans la base de donnée les champs ci-dessous
+@EntityListeners(AuditingEntityListener.class)
+// ecouter automatiquement cette classe et mettre à jour dans la base de donnée les champs ci-dessous
 public class AbstractEntity implements Serializable {
 
     /**@CreatedDate

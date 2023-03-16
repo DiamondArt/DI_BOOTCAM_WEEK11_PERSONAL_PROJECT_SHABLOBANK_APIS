@@ -8,17 +8,11 @@ import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.servlet.http.HttpServletRequest;
-import java.util.UUID;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Objects;
-/**
- * @author desireadje
- * @created 26/01/2023 - 19:40
- * @project spring-boot
- */
+import java.util.*;
+
+
 public class JwtUserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
     private Long id;
@@ -41,8 +35,9 @@ public class JwtUserDetailsImpl implements UserDetails {
         HashMap device = new HashMap<>();
         device.put("userAgent", request.getHeader("user-agent"));
         device.put("remoteAddress", request.getRemoteAddr());
-        return new JwtUserDetailsImpl(user.getId(), user.getEmail(), user.getPassword(), user.getRole(),device);
+        return new JwtUserDetailsImpl(user.getId(), user.getEmail(), user.getPassword(), user.getRole(), device);
     }
+
     public Claims getClaims() {
         Claims claims = new DefaultClaims();
         claims.setId(UUID.randomUUID().toString());
@@ -74,18 +69,22 @@ public class JwtUserDetailsImpl implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     @Override
     public boolean isEnabled() {
         return true;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

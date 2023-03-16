@@ -1,13 +1,13 @@
 package com.shablobank.app.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Optional;
 
 @Data
 @Builder
@@ -40,6 +40,7 @@ public class User extends AbstractEntity {
 
 
     @Column(name = "password")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Embedded
@@ -55,14 +56,16 @@ public class User extends AbstractEntity {
     private Role role;
 
 
- public static User superAdmin(Role role){
-     User user = new  User();
-     user.setFirstname("Melissa");
-     user.setLastname("aaaa");
-     user.setEmail("hello@gmail.com");
-     user.setPassword("helloworld");
-     user.setRole(role);
+    public static User superAdmin(Optional<Role> role, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
+        User user = new User();
+        user.setFirstname("Melissa");
+        user.setLastname("aaaa");
+        user.setEmail("hello@gmail.com");
+        if (!(bCryptPasswordEncoder == null)) {
+            user.setPassword(bCryptPasswordEncoder.encode("helloworld"));
+        }
+        user.setRole(role.get());
 
-     return user;
- }
+        return user;
+    }
 }

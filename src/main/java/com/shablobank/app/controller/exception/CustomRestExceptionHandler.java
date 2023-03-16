@@ -28,11 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * @author desireadje
- * @created 25/01/2023 - 18:12
- * @project spring-boot
- */
+
 @ControllerAdvice
 public class CustomRestExceptionHandler extends Throwable {
 

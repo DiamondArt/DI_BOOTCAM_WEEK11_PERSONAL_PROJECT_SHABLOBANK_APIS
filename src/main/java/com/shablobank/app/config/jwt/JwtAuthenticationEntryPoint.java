@@ -11,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
-/**
- * @author desireadje
- * @created 18/11/2022 - 10:45
- * @project spring-boot
- */
+
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {
     private static final long serialVersionUID = 1L;

@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/api/blood")
 @CrossOrigin("*")
+@RequestMapping("/v1/api/rest/blood")
 public class BloodController {
     @Autowired
     private IBloodRepository bloodRepository;

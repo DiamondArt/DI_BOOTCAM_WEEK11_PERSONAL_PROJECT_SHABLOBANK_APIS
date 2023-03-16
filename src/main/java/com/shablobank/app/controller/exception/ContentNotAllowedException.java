@@ -5,11 +5,7 @@ import org.springframework.validation.ObjectError;
 
 import java.util.List;
 
-/**
- * @author desireadje
- * @created 16/01/2023 - 09:43
- * @project spring-boot
- */
+
 public class ContentNotAllowedException extends Exception {
     List<ObjectError> errors;
 
