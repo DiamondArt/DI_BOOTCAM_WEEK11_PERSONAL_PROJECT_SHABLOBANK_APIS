@@ -7,8 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
-
-@RestController
+@Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM tusers  WHERE email =:email ", nativeQuery = true)

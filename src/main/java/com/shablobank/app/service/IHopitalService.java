@@ -17,6 +17,7 @@ public interface IHopitalService {
     Hopital updateHopital(Long idHopital, Hopital hopital) throws EntityException;
 
     Hopital fetchHopitalByName(String hopitalName);
+    String getHopitalName(Long id);
 
     Hopital QueryfetchHopitalById(Long idHopital);
 }

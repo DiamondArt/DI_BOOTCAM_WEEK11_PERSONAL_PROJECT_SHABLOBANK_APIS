@@ -2,7 +2,9 @@ package com.shablobank.app.service;
 
 import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Bloods;
+import com.shablobank.app.payload.BloodDto;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface IBloodService {
@@ -19,4 +21,5 @@ public interface IBloodService {
     List<Bloods> findAllByHopital(Long idHopital) throws EntityException;
     List<Bloods> findAllByHopitalAndBloodTypeIgnoreCase(Long idHopital, String bloodType) throws EntityException;
     List<Bloods> findAllByBloodTypeIgnoreCase(String bloodType);
+    List<Object>countQuantityByHopital(Long idHopital);
 }

@@ -81,4 +81,8 @@ public class HopitalService implements IHopitalService{
         return hopitalRepository.findHopitalQueryMethod(idHopital);
     }
 
+    @Override
+    public String getHopitalName(Long id) {
+        return hopitalRepository.findByName(id);
+    }
 }

@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/v1/api/rest/auth/signin")
+                .antMatchers("/v1/api/rest/auth/signin","/v1/api/rest/hopital","/v1/api/rest/auth/signup")
                 .permitAll()
                 .anyRequest() // all other requests need to be authenticated
                 .authenticated()
@@ -78,7 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // Add a filter to validate tokens on each request
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
         initData();
     }
 
@@ -114,12 +113,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private void createDefaultRole() {
         try {
-            if (roleRepository.findByName(ERole.ROLE_ADMIN) == null){
-                roleRepository.save(Role.roleAdmin());
-            }
-            if (roleRepository.findByName(ERole.ROLE_MODERATOR) == null){
-                roleRepository.save(Role.roleModerator());
-            }
+            roleRepository.save(Role.roleAdmin());
+            roleRepository.save(Role.roleModerator());
         } catch (Exception e) {
             e.printStackTrace();
             getLogger().error(e.getMessage());

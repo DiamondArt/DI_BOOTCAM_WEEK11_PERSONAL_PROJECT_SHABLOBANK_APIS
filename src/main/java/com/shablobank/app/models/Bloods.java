@@ -36,6 +36,11 @@ public class Bloods extends AbstractEntity implements  Serializable{
   @Column(name = "bloodType" )
   private String bloodType;
 
+  @NotNull(message = "Le champ rhesus est obligatoire")
+  @NotBlank(message = "Le champ rhesus ne peut etre vide")
+  @Column(name = "rhesus" )
+  private String rhesus;
+
   @Column(name = "designation", nullable = true)
   private String designation;
 

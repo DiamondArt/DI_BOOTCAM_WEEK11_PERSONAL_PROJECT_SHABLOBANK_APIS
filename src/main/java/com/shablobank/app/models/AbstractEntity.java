@@ -27,6 +27,5 @@ public class AbstractEntity implements Serializable {
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
-    @JsonIgnore
     private Date updatedAt;
 }

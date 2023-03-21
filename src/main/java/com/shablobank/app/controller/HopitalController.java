@@ -36,7 +36,7 @@ public class HopitalController {
     @GetMapping("/hello")
     public Map<String, String> sayHello() {
         HashMap<String, String> map = new HashMap<>();
-        map.put("key", "value");
+        map.put("key", hopitalService.getHopitalName(1L));
         map.put("foo", "bar");
         map.put("aa", "bb");
         return map;

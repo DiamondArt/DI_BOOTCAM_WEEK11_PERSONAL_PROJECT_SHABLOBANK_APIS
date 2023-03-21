@@ -55,12 +55,12 @@ public class User extends AbstractEntity {
     @JoinColumn(name = "id_role", referencedColumnName = "id")
     private Role role;
 
-
+    
     public static User superAdmin(Optional<Role> role, BCryptPasswordEncoder bCryptPasswordEncoder) throws Exception {
         User user = new User();
         user.setFirstname("Melissa");
         user.setLastname("aaaa");
-        user.setEmail("hello@gmail.com");
+        user.setEmail("angella@gmail.com");
         if (!(bCryptPasswordEncoder == null)) {
             user.setPassword(bCryptPasswordEncoder.encode("helloworld"));
         }

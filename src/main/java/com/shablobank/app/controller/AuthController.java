@@ -84,6 +84,7 @@ public class AuthController {
 
         HashMap body = new HashMap<>();
         body.put("role",user.getRole());
+        body.put("hopital",user.getHopital().getId());
         body.put("message", "User signed-in successfully!.");
         body.put("accessToken", accessToken);
 

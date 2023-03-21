@@ -16,6 +16,7 @@ public interface IHopitalRepository  extends JpaRepository<Hopital, Long> {
             //"WHERE ue.user_id = :userId", nativeQuery = true)
     Hopital findHopitalQueryMethod(@Param("hopitalId") Long hopitalId);
 
-    public Hopital findByName(String hopitalName);
+    @Query(value = "SELECT name FROM thopitals WHERE id=:hopitalId", nativeQuery = true)
+    public String findByName(Long hopitalId);
     public Hopital findByNameIgnoreCase(String hopitalName);
 }
