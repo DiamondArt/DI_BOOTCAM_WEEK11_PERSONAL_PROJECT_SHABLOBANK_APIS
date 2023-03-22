@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/v1/api/rest/commande")
+@RequestMapping("/v1/api/rest/demande")
 @CrossOrigin("*")
 public class CommandeController {
     @Autowired

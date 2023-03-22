@@ -17,7 +17,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "thopitals")
-public class Hopital extends AbstractEntity {
+public class
+Hopital extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

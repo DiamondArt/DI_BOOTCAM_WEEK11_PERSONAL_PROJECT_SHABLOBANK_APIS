@@ -44,10 +44,8 @@ public class Bloods extends AbstractEntity implements  Serializable{
   @Column(name = "designation", nullable = true)
   private String designation;
 
-  @NotNull(message = "Le champ quantité est obligatoire")
-  @NotBlank(message = "Le champ quantité ne peut etre vide")
   @Column(name = "quantity")
-  private String quantity;
+  private Integer quantity;
 
   @NotNull(message = "Le champ volume est obligatoire")
   @NotBlank(message = "Le champ volume ne peut etre vide")
@@ -57,17 +55,19 @@ public class Bloods extends AbstractEntity implements  Serializable{
   @Column(name = "priceHt", nullable = true)
   private String priceHt;
 
+  @Column(name = "statut", nullable = false)
+  private Boolean statut;
+
   @ManyToOne
   @JoinColumn(name = "idHopital")
   private Hopital hopital;
 
-
-  //@ManyToOne
-  //@JoinColumn(name = "idDonor")
-  //private Donor donor;
-
   @OneToMany(mappedBy = "blood")
   private List<MvtStock> mvtStks;
+
+  @JsonIgnore
+  @OneToMany(mappedBy = "blood", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+  private List<CommandePatient> commandePatientList;
 
   @OneToMany(mappedBy = "blood",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
   private List<BloodAnalyse> bloodAnalysies;

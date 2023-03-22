@@ -39,6 +39,7 @@ public class BloodController {
                     "id", blood.getId(),
                     "codeRef", blood.getCodeRef(),
                     "bloodType", blood.getBloodType(),
+                    "rhesus", blood.getRhesus(),
                     "designation", blood.getDesignation(),
                     "quantity", blood.getQuantity(),
                     "volume", blood.getVolume(),
@@ -59,14 +60,44 @@ public class BloodController {
     @GetMapping("hopital/{id}")
     public ResponseEntity<List<Object>> queryfetchBloodByHopital(@PathVariable("id") Long idHopital) throws EntityException {
 
-        List<Bloods> entityList = bloodService.findAllByHopital(idHopital);
+        List<Object> entityList = bloodService.findAllByHopital(idHopital);
         List<Object> entities = new ArrayList<Object>();
         LOGGER.info("Inside QueryfetchBloodByHopital BloodController ");
-        for(Bloods blood : entityList) {
+        for(int index = 0; index< entityList.size(); index++) {
+            entities.add(Map.of(
+                    "groupe", entityList.get(index)
+            ));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(entities);
+    }
+
+    @GetMapping("hopital/{id}/type/{bloodtype}")
+    public ResponseEntity<List<Object>> queryGroupBloodByHopitalAndType(@PathVariable("id") Long idHopital, @PathVariable("bloodtype") String bloodtype) throws EntityException {
+
+        List<Object> entityList = bloodService.BloodTypegroupe(idHopital, bloodtype);
+        List<Object> entities = new ArrayList<Object>();
+        LOGGER.info("Inside queryGroupBloodByHopitalAndType BloodController ");
+        for(int index = 0; index< entityList.size(); index++) {
+            entities.add(Map.of(
+                    "groupe", entityList.get(index)
+            ));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(entities);
+    }
+
+    @GetMapping("hopital/{id}/groupe/{bloodtype}")
+    public ResponseEntity<List<Object>> queryfetchBloodByHopitalAndType(@PathVariable("id") Long idHopital, @PathVariable("bloodtype") String bloodtype) throws EntityException {
+
+        LOGGER.info("Inside queryfetchBloodByHopitalAndType BloodController ");
+        List<Bloods> entityList = bloodService.findAllByHopitalAndBloodTypeIgnoreCase(idHopital, bloodtype);
+        List<Object> entities = new ArrayList<Object>();
+
+        for (Bloods blood : entityList) {
             entities.add(Map.of(
                     "id", blood.getId(),
                     "codeRef", blood.getCodeRef(),
                     "bloodType", blood.getBloodType(),
+                    "rhesus", blood.getRhesus(),
                     "designation", blood.getDesignation(),
                     "quantity", blood.getQuantity(),
                     "volume", blood.getVolume(),
@@ -77,17 +108,32 @@ public class BloodController {
         return ResponseEntity.status(HttpStatus.OK).body(entities);
     }
 
-    @GetMapping("hopital/{id}/groupe/{bloodtype}")
-    public List<Bloods> queryfetchBloodByHopitalAndType(@PathVariable("id") Long idHopital, @PathVariable("bloodtype") String bloodtype) throws EntityException {
-
-        LOGGER.info("Inside queryfetchBloodByHopitalAndType BloodController ");
-        return bloodService.findAllByHopitalAndBloodTypeIgnoreCase(idHopital, bloodtype);
-    }
-
     @GetMapping("groupe/{bloodtype}")
     public List<Bloods> findAllByBloodTypeIgnoreCase(@PathVariable("bloodtype") String bloodtype){
         LOGGER.info("Inside findAllByBloodTypeIgnoreCase BloodController ");
         return bloodService.findAllByBloodTypeIgnoreCase(bloodtype);
+    }
+
+    @GetMapping("/autoselect/{hopital}/{rhesus}/{quantity}")
+    public ResponseEntity<List<Object>> dynamiqueFetchBlood(@PathVariable("hopital") Long hopital, @PathVariable("rhesus") String rhesus,@PathVariable("quantity") int quantity){
+        LOGGER.info("Inside dynamiqueFetchBlood BloodController ");
+        List<Bloods> entityList = bloodService.dynamiqueFetchBlood(hopital, rhesus, quantity);
+        List<Object> entities = new ArrayList<Object>();
+
+        for (Bloods blood : entityList) {
+            entities.add(Map.of(
+                    "id", blood.getId(),
+                    "codeRef", blood.getCodeRef(),
+                    "bloodType", blood.getBloodType(),
+                    "rhesus", blood.getRhesus(),
+                    "designation", blood.getDesignation(),
+                    "quantity", blood.getQuantity(),
+                    "volume", blood.getVolume(),
+                    "hopital_id", blood.getHopital().getId(),
+                    "createdAt", blood.getCreatedAt()
+            ));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(entities);
     }
 
     @GetMapping("stats/hopital/{id}")

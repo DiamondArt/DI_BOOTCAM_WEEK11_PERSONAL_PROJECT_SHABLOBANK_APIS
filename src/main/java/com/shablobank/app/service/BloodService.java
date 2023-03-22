@@ -2,6 +2,7 @@ package com.shablobank.app.service;
 
 import com.shablobank.app.controller.exception.EntityException;
 import com.shablobank.app.models.Bloods;
+import com.shablobank.app.models.Demandes;
 import com.shablobank.app.models.Hopital;
 import com.shablobank.app.payload.BloodDto;
 import com.shablobank.app.repository.IBloodRepository;
@@ -9,6 +10,7 @@ import com.shablobank.app.repository.IHopitalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +62,7 @@ public class BloodService implements IBloodService{
     }
 
     @Override
-    public List<Bloods> findAllByHopital(Long idHopital) throws EntityException {
+    public List<Object> findAllByHopital(Long idHopital) throws EntityException {
         Optional<Hopital> hopital = hopitalRepository.findById(idHopital);
         if (!hopital.isPresent()) {
             throw new EntityException("Item not available ");
@@ -88,5 +90,27 @@ public class BloodService implements IBloodService{
         return bloodRepository.countAllByQuantityAndHopital(idHopital);
     }
 
+    @Override
+    public List<Bloods> dynamiqueFetchBlood(Long idHopital, String rhesus, int quantity) {
+        return bloodRepository.autoFetchBlood(idHopital, rhesus, quantity);
+    }
 
+    @Override
+    public Bloods updateBlood(Long id, Integer quantity) throws EntityException {
+        Optional<Bloods> blood = bloodRepository.findById(id);
+        if (blood.isPresent()) {
+            Bloods _blood = blood.get();
+            Integer new_quantity = _blood.getQuantity() - quantity;
+            _blood.setStatut(true);
+            _blood.setQuantity(new_quantity);
+             return bloodRepository.save(_blood);
+        } else {
+            throw new EntityException("Item not available ");
+        }
+    }
+
+    @Override
+    public List<Object> BloodTypegroupe(Long idHopital, String bloodType) {
+        return bloodRepository.findAllByHopitalAndBloodTypegroupeByBlood(idHopital, bloodType);
+    }
 }

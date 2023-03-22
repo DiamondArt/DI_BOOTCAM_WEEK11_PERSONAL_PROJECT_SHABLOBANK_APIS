@@ -23,8 +23,7 @@ public class Demandes extends AbstractEntity {
     @Column(name = "bloodType", length = 3, nullable = false)
     private String bloodType;
     @Column(name = "quantity", nullable = false)
-    private int quantity;
-
+    private Integer quantity;
 
     @Column(name = "statut", nullable = false)
     private Boolean statut;

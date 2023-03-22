@@ -3,7 +3,6 @@ package com.shablobank.app.models;
 import java.time.Instant;
 import java.util.List;
 import javax.persistence.*;
-
 import lombok.*;
 
 @Data
